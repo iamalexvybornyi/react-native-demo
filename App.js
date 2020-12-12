@@ -1,38 +1,44 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  ScrollView,
+  FlatList
+} from "react-native";
 
 export default function App() {
-  const [name, setName] = useState("name");
-  const [age, setAge] = useState(40);
-
-  const clickHandler = () => {
-    setAge(45);
-  };
+  const [people, setPeople] = useState([
+    { name: "John Doe", key: "1" },
+    { name: "Alex Wu", key: "2" },
+    { name: "Craig Rain", key: "3" },
+    { name: "Brian Styles", key: "4" },
+    { name: "Mary Very", key: "5" },
+    { name: "Lina Ray", key: "6" },
+    { name: "Brian Myles", key: "7" },
+  ]);
 
   return (
     <View style={styles.container}>
-      <Text>Enter name: </Text>
-      <TextInput
-        multiline
-        style={styles.input}
-        placeholder="e.g. John Doe"
-        onChangeText={(value) => setName(value)}
+      <FlatList
+        data={people}
+        renderItem={({ item }) => (
+          <Text style={styles.item}>{item.name}</Text>
+        )}
       />
-
-      <Text>Enter age: </Text>
-      <TextInput
-        keyboardType='numeric'
-        style={styles.input}
-        placeholder="e.g. 30"
-        onChangeText={(value) => setAge(value)}
-      />
-
-      <Text>The name is {name} and the age is {age}</Text>
-
-      <View style={styles.buttonContainer}>
-        <Button title="Update age" onPress={clickHandler} />
-      </View>
+      
+      {/* <ScrollView>
+        {people.map((item) => {
+          return (
+            <View key={item.key}>
+              <Text style={styles.item}>{item.name}</Text>
+            </View>
+          );
+        })}
+      </ScrollView> */}
     </View>
   );
 }
@@ -41,17 +47,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingTop: 40,
+    paddingHorizontal: 20,
+    // alignItems: "center",
+    // justifyContent: "center",
   },
-  buttonContainer: {
-    marginTop: 20,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "blue",
-    padding: 8,
-    margin: 10,
-    width: 200,
+  item: {
+    marginTop: 24,
+    padding: 40,
+    backgroundColor: "pink",
+    fontSize: 24,
   },
 });
