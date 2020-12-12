@@ -12,24 +12,25 @@ import {
 
 export default function App() {
   const [people, setPeople] = useState([
-    { name: "John Doe", key: "1" },
-    { name: "Alex Wu", key: "2" },
-    { name: "Craig Rain", key: "3" },
-    { name: "Brian Styles", key: "4" },
-    { name: "Mary Very", key: "5" },
-    { name: "Lina Ray", key: "6" },
-    { name: "Brian Myles", key: "7" },
+    { name: "John Doe", id: "1" },
+    { name: "Alex Wu", id: "2" },
+    { name: "Craig Rain", id: "3" },
+    { name: "Brian Styles", id: "4" },
+    { name: "Mary Very", id: "5" },
+    { name: "Lina Ray", id: "6" },
+    { name: "Brian Myles", id: "7" },
   ]);
 
   return (
     <View style={styles.container}>
       <FlatList
+      keyExtractor={(item) => item.id}
         data={people}
         renderItem={({ item }) => (
           <Text style={styles.item}>{item.name}</Text>
         )}
       />
-      
+
       {/* <ScrollView>
         {people.map((item) => {
           return (
@@ -57,5 +58,7 @@ const styles = StyleSheet.create({
     padding: 40,
     backgroundColor: "pink",
     fontSize: 24,
+    marginHorizontal: 10,
+    marginTop: 24
   },
 });
